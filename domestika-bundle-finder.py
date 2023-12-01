@@ -34,10 +34,12 @@ def updateDB(args):
 def getBundleURLs(url="https://www.domestika.org/en/courses/packs"):
     r = requests.get(url)
     parsed = BeautifulSoup(r.text, features="html.parser")
-    bundle_urls = parsed.find_all("h3", class_="o-course-card__title")
+    bundle_urls = parsed.find_all("div", class_="CoursePackCard-TitleContainer")
     urls = []
+    #print(bundle_urls)
     for bundle_url in bundle_urls:
         urls.append(bundle_url.find("a").get("href"))
+    print(urls)
     return urls
 
 def getMetaData(r):
